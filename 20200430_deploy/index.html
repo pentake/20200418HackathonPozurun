@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="noodl-app.png">
+    <title>Noodl Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            user-select: none;
+            background-color: black;
+        }
+
+        img {
+            -webkit-user-drag: none;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            cursor: default;
+        }
+
+    </style>
+</head>
+<body>
+<noscript>
+    You need to enable JavaScript to run this app.
+</noscript>
+
+<div id="root" style="display: flex; width:100vw; height: 100vh; overflow: hidden"></div>
+
+<script src="react.production.min.js"></script>
+<script src="react-dom.production.min.js"></script>
+
+
+
+<script type="application/javascript">
+    window.__noodl_modules = [];
+    window.Noodl = {
+        defineModule:function(m) {
+            window.__noodl_modules.push(m);
+        }
+    }
+    window.projectData = {"settings":{},"components":[{"name":"/Santa_AR","nodes":[{"id":"1471b8b0-8ca2-6edc-0309-a7908a796eda","type":"Script Downloader","parameters":{"input 0":"https://aframe.io/releases/0.8.2/aframe.min.js","input 1":"https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"},"ports":[{"name":"input 0","displayName":"Script 0","type":"string","plug":"input","group":"External scripts","index":2},{"name":"input 1","displayName":"Script 1","type":"string","plug":"input","group":"External scripts","index":3},{"name":"input 2","displayName":"Script 2","type":"string","plug":"input","group":"External scripts","index":4}],"children":[]},{"id":"7c6abc22-c1ac-4b41-d344-5cea6915b668","type":"Group","parameters":{"blockTouch":true,"width":{"value":100,"unit":"vw"},"height":{"value":100,"unit":"vh"}},"ports":[{"name":"width","type":{"name":"number","units":["%","px","vw"],"defaultUnit":"%"},"plug":"input","group":"Dimensions","displayName":"Width","default":"100","index":2},{"name":"height","type":{"name":"number","units":["%","px","vh"],"defaultUnit":"%"},"plug":"input","group":"Dimensions","displayName":"Height","default":"100","index":3},{"name":"borderWidth","type":{"name":"number","units":["px"],"defaultUnit":"px"},"plug":"input","group":"Style","displayName":"Border Width","default":0,"index":353},{"name":"borderColor","type":"color","plug":"input","group":"Style","displayName":"Border Color","index":354}],"children":[]},{"id":"928c3214-f2d9-a3a5-16b7-996a67937200","type":"Timer","parameters":{"duration":1000},"ports":[],"children":[]},{"id":"a74ac974-ea0c-352f-f53d-617961e2a011","type":"Javascript2","parameters":{"code":"define({\n\t// The input ports of the Javascript node, name of input and type\n\tinputs:{\n\t    // ExampleInput:'number',\n\t    // Available types are 'number', 'string', 'boolean', 'color' and 'signal',\n\t    mySignal: 'signal',\n\t    scriptLoaded: 'boolean'\n\t},\n\t\n\t// The output ports of the Javascript node, name of output and type\n\toutputs:{\n\t    // ExampleOutput:'string',\n\t},\n\t\n\t// All signal inputs need their own function with the corresponding name that\n\t// will be run when a signal is received on the input.\n\tmySignal:function(inputs,outputs) {\n\t\t// ...\n\t\tif (!inputs.scriptLoaded) {\n                return;\n        }\n\t\t// ...\n        \n        var body = document.getElementsByTagName('body')[0];\n        body.innerHTML = \n        '<a-scene embedded arjs=\"sourceType:webcam; debugUIEnabled:false; trackingMethod:best;\" vr-mode-ui=\"enabled: false\">'+\n\t\t'<a-assets>'+\n        '<a-asset-item id=\"santa-obj\" src=\"santa.obj\"></a-asset-item>'+\n        '<a-asset-item id=\"santa-mtl\" src=\"santa.mtl\"></a-asset-item>'+\n        '</a-assets>'+\n        '<a-marker preset=\"hiro\">'+\n        '<a-obj-model id=\"santa\" src=\"#santa-obj\" mtl=\"#santa-mtl\" position=\"0 0 0\" scale=\"0.5 0.5 0.5\" rotation=\"0 0 0\"></a-obj-model>'+\n        '<a-text value=\"Santa!!!\" position=\"0 1.3 0\" align=\"center\"></a-text>'+\n        '</a-marker>'+\n        '<a-entity camera></a-entity>'+\n        '</a-scene>';\n        // console.log(body);\n\t}\n})\n"},"ports":[{"name":"code","type":{"name":"string","allowEditOnly":true,"codeeditor":"javascript"},"plug":"input","group":"Code","displayName":"Code","default":"define({\n\t// The input ports of the Javascript node, name of input and type\n\tinputs:{\n\t    // ExampleInput:'number',\n\t    // Available types are 'number', 'string', 'boolean', 'color' and 'signal',\n\t    mySignal:'signal',\n\t},\n\t\n\t// The output ports of the Javascript node, name of output and type\n\toutputs:{\n\t    // ExampleOutput:'string',\n\t},\n\t\n\t// All signal inputs need their own function with the corresponding name that\n\t// will be run when a signal is received on the input.\n\tmySignal:function(inputs,outputs) {\n\t\t// ...\n\t},\n\t\n\t// This function will be called when any of the inputs have changed\n\tchange:function(inputs,outputs) {\n\t\t// ...\n\t}\n})\n","index":1},{"name":"mySignal","plug":"input","type":{"name":"signal"},"group":"Inputs","index":2},{"name":"scriptLoaded","plug":"input","type":{"name":"boolean"},"group":"Inputs","index":3}],"children":[]}],"connections":[{"sourceId":"1471b8b0-8ca2-6edc-0309-a7908a796eda","sourcePort":"loaded","targetId":"928c3214-f2d9-a3a5-16b7-996a67937200","targetPort":"start"},{"sourceId":"1471b8b0-8ca2-6edc-0309-a7908a796eda","sourcePort":"loaded","targetId":"a74ac974-ea0c-352f-f53d-617961e2a011","targetPort":"scriptLoaded"},{"sourceId":"928c3214-f2d9-a3a5-16b7-996a67937200","sourcePort":"timerFinished","targetId":"a74ac974-ea0c-352f-f53d-617961e2a011","targetPort":"mySignal"}],"ports":[],"roots":["7c6abc22-c1ac-4b41-d344-5cea6915b668"]}],"rootComponent":"/Santa_AR","rootNode":"7c6abc22-c1ac-4b41-d344-5cea6915b668","metadata":{"deviceSettings":{"deviceTypes":[{"name":"A-Frame","desc":"","rootComponentPath":"/Santa_AR","type":"Browser"}]}}};
+</script>
+
+
+
+<script src="noodl.js"></script>
+</body>
+</html>
